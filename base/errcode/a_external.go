@@ -1,7 +1,7 @@
 /*
  * [file desc]
  * author: CC
- * email : crazycloudcc@gmail.com
+ * email : 151503324@qq.com
  * date  : 2017.06.17
  */
 package errcode
@@ -16,18 +16,28 @@ import (
 // constants, variables, structs, interfaces.
 /************************************************************************/
 
-var errfmt *base.Map
-
 /************************************************************************/
 // export functions.
 /************************************************************************/
 
-func NewError(code int32, args ...interface{}) *ErrCode {
-	f := errfmt.Get(code).(string)
-	// TODO.
+// init module from json file.
+func Init(fn string) {
+}
+
+// create error code.
+func NewErrorCode(code int32, args ...interface{}) *ErrCode {
+	v := errfmt.Get(code)
 	ec := new(ErrCode)
 	ec.Code = code
-	ec.Err = errors.New(fmt.Sprintf(f, args...))
+	if v == nil {
+		v = errfmt.Get(Unknown)
+		ec.Err = errors.New(v.(string))
+	} else {
+		f := v.(string)
+		if args != nil {
+			ec.Err = errors.New(fmt.Sprintf(f, args...))
+		}
+	}
 	return ec
 }
 
@@ -35,9 +45,13 @@ func NewError(code int32, args ...interface{}) *ErrCode {
 // moudule functions.
 /************************************************************************/
 
-func init() {
-	errfmt = base.NewMap(1)
-	errfmt.Add(int32(1), "unknown error.")
+// register error code.
+func regErrorCode(code int32, fmtString string) {
+	if errfmt.Get(code) != nil {
+		base.LogError("error code: ", code, fmtString, "is already not exists")
+		return
+	}
+	errfmt.Add(code, fmtString)
 }
 
 /************************************************************************/

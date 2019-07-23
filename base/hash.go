@@ -1,7 +1,7 @@
 /*
  * go map data.
  * author: CC
- * email : crazycloudcc@gmail.com
+ * email : 151503324@qq.com
  * date  : 2017.06.17
  */
 package base
@@ -10,35 +10,35 @@ package base
 // constants, variables, structs, interfaces.
 /************************************************************************/
 
-type Map struct {
+type Hash struct {
 	table map[interface{}]interface{}
 	count int32
 }
 
 /************************************************************************/
-// 模块对外接口.
+// export functions.
 /************************************************************************/
 
-// 创建map.
-func NewMap(count int32) *Map {
-	m := new(Map)
+// create new hash.
+func NewHash(count int32) *Hash {
+	m := new(Hash)
 	m.table = make(map[interface{}]interface{})
 	m.count = count
 	return m
 }
 
-// 添加.
-func (this *Map) Add(key interface{}, value interface{}) {
+// add.
+func (this *Hash) Add(key interface{}, value interface{}) {
 	this.table[key] = value
 }
 
-// 设置.
-func (this *Map) Set(key interface{}, value interface{}) {
+// set.
+func (this *Hash) Set(key interface{}, value interface{}) {
 	this.table[key] = value
 }
 
-// 获取.
-func (this *Map) Get(key interface{}) interface{} {
+// get.
+func (this *Hash) Get(key interface{}) interface{} {
 	ret, ok := this.table[key]
 	if ok {
 		return ret
@@ -46,23 +46,27 @@ func (this *Map) Get(key interface{}) interface{} {
 	return nil
 }
 
-// 删除.
-func (this *Map) Del(key interface{}) {
+// delete.
+func (this *Hash) Del(key interface{}) {
 	delete(this.table, key)
 }
 
-// 长度.
-func (this *Map) Len() int {
+// length.
+func (this *Hash) Len() int {
 	return len(this.table)
 }
 
-// 遍历.
-func (this *Map) ForRange(f func(key interface{}, value interface{})) {
+// for range.
+func (this *Hash) ForRange(f func(key interface{}, value interface{})) {
 	for k, v := range this.table {
 		f(k, v)
 	}
 }
 
 /************************************************************************/
-// 模块内功能实现
+// moudule functions.
+/************************************************************************/
+
+/************************************************************************/
+// unit tests.
 /************************************************************************/

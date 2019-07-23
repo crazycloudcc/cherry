@@ -1,14 +1,23 @@
 /*
  * [file desc]
  * author: CC
- * email : crazycloudcc@gmail.com
+ * email : 151503324@qq.com
  * date  : 2017.06.17
  */
 package errcode
 
+import "cherry/base"
+
 /************************************************************************/
 // constants, variables, structs, interfaces.
 /************************************************************************/
+
+const (
+	Success int32 = 0
+	Unknown int32 = 1000 + iota
+)
+
+var errfmt *base.Hash
 
 /************************************************************************/
 // export functions.
@@ -17,6 +26,12 @@ package errcode
 /************************************************************************/
 // moudule functions.
 /************************************************************************/
+
+func init() {
+	errfmt = base.NewHash(1)
+	errfmt.Add(Success, "success.")
+	errfmt.Add(Unknown, "error unknown.")
+}
 
 /************************************************************************/
 // unit tests.

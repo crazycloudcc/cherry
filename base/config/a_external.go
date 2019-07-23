@@ -1,67 +1,49 @@
 /*
- * binary tree.
+ * [file desc]
  * author: CC
- * email : crazycloudcc@gmail.com
+ * email : 151503324@qq.com
  * date  : 2017.06.17
  */
-package base
+package config
 
-import (
-	"sync"
-)
+import "errors"
 
 /************************************************************************/
 // constants, variables, structs, interfaces.
 /************************************************************************/
 
-type BTree struct {
-	sync.RWMutex
-}
-
 /************************************************************************/
-// 模块对外接口.
+// export functions.
 /************************************************************************/
 
-// 创建.
-func NewBTree() *BTree {
-	bt := new(BTree)
-	return bt
+/* read json data from file.
+ * param fn: file name.
+ * param ft: file type. (example: json, xlsx, txt, ...)
+ * param reply: read data.
+ * return: function error info.
+ */
+func Read(fn string, ft string, reply interface{}) error {
+	switch ft {
+	case JSON:
+		return jsonRead(fn, reply)
+	}
+	return errors.New("Read: Unkown Type File!")
 }
 
-// 插入.
-func (this *BTree) Insert() error {
-	return nil
-}
-
-// 查询.
-func (this *BTree) Find() (*BTreeNode, error) {
-	return nil, nil
-}
-
-// 删除.
-func (this *BTree) Remove() error {
-	return nil
-}
-
-// 前序遍历.
-func (this *BTree) ForWithFront() []*BTreeNode {
-	return nil
-}
-
-// 中序遍历.
-func (this *BTree) ForWithMiddle() []*BTreeNode {
-	return nil
-}
-
-// 后序遍历.
-func (this *BTree) ForWithBack() []*BTreeNode {
+/* write json data from file.
+ * param fn: file name.
+ * param ft: file type. (example: json, xlsx, txt, ...)
+ * param data: write data.
+ * return: function error info.
+ */
+func Write(fn string, ft string, data interface{}) error {
 	return nil
 }
 
 /************************************************************************/
-// 模块内功能实现
+// moudule functions.
 /************************************************************************/
 
 /************************************************************************/
-// 模块内功能调试
+// unit tests.
 /************************************************************************/

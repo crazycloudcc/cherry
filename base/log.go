@@ -1,7 +1,7 @@
 /*
  * logger.
  * author: CC
- * email : crazycloudcc@gmail.com
+ * email : 151503324@qq.com
  * date  : 2017.06.17
  */
 package base
@@ -9,7 +9,6 @@ package base
 import (
 	"fmt"
 	"time"
-	// "runtime"
 )
 
 /************************************************************************/
@@ -24,32 +23,32 @@ const (
 	LOG_LEVEL_FATAL
 )
 
-const (
-	FLAG_NONE = 1 << iota
-	FLAG_FILE
-	FILE_LINE
-	FILE_TIME
-)
+// const (
+// 	FLAG_NONE = 1 << iota
+// 	FLAG_FILE
+// 	FILE_LINE
+// 	FILE_TIME
+// )
 
 var logLevel int = LOG_LEVEL_DEBUG
-var logFlag int = FLAG_NONE
+
+// var logFlag int = FLAG_NONE
 
 // var doLog func(prefix string, args ...interface{})
 
 /************************************************************************/
-// 模块对外接口.
+// export functions.
 /************************************************************************/
 
-// 设置Log输出等级.
+// set log level.
 func SetLogLevel(level int) {
 	// log.SetFlags(log.Lshortfile | log.LstdFlags)
 	logLevel = level
 }
 
-// 设置Log输出属性.
-func SetLogFlag(flag int) {
-	logFlag = flag
-}
+// func SetLogFlag(flag int) {
+// 	logFlag = flag
+// }
 
 func LogDebug(args ...interface{}) {
 	if logLevel <= LOG_LEVEL_DEBUG {
@@ -83,10 +82,10 @@ func LogFatal(args ...interface{}) {
 }
 
 /************************************************************************/
-// 模块内功能实现
+// moudule functions.
 /************************************************************************/
 
-// // 显示日期, 文件名, 行数.
+// // show date, file name, time.
 // func doLog(prefix string, args ...interface{}) {
 // 	_, file, line, _ := runtime.Caller(2) // depth
 // 	// log.Println(file, line, args)
@@ -96,3 +95,7 @@ func LogFatal(args ...interface{}) {
 func doLog(prefix string, args ...interface{}) {
 	fmt.Println(time.Now().Format("2006/01/02 15:04:05.000"), prefix, args)
 }
+
+/************************************************************************/
+// unit tests.
+/************************************************************************/

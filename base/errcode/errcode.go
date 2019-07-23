@@ -1,7 +1,7 @@
 /*
  * [file desc]
  * author: CC
- * email : crazycloudcc@gmail.com
+ * email : 151503324@qq.com
  * date  : 2017.06.17
  */
 package errcode
@@ -12,8 +12,8 @@ package errcode
 
 // TODO.
 type ErrCode struct {
-	Code int32 // error code.
-	Err  error // error string.
+	Code int32
+	Err  error
 }
 
 /************************************************************************/

@@ -1,7 +1,7 @@
 /*
  * binary convert functions.
  * author: CC
- * email : crazycloudcc@gmail.com
+ * email : 151503324@qq.com
  * date  : 2017.06.17
  */
 package base
@@ -17,20 +17,20 @@ import (
 var littleEndian bool
 
 /************************************************************************/
-// 模块对外接口.
+// export functions.
 /************************************************************************/
 
-// 设置小字端.
+// set little endian.
 func SetLittleEndian() {
 	littleEndian = true
 }
 
-// 设置大字端.
+// set big endian.
 func SetBigEndian() {
 	littleEndian = false
 }
 
-// 二进制写入uint16到[]byte.
+// covert uint16 to []byte.
 func Uint16ToByte(dst []byte, v uint16) {
 	if littleEndian {
 		binary.LittleEndian.PutUint16(dst, v)
@@ -39,7 +39,7 @@ func Uint16ToByte(dst []byte, v uint16) {
 	}
 }
 
-// 二进制写入uint32到[]byte.
+// covert uint32 to []byte.
 func Uint32ToByte(dst []byte, v uint32) {
 	if littleEndian {
 		binary.LittleEndian.PutUint32(dst, v)
@@ -48,7 +48,7 @@ func Uint32ToByte(dst []byte, v uint32) {
 	}
 }
 
-// 二进制转uint16.
+// covert []byte to uint16.
 func ByteToUint16(data []byte) uint16 {
 	if littleEndian {
 		return binary.LittleEndian.Uint16(data)
@@ -57,7 +57,7 @@ func ByteToUint16(data []byte) uint16 {
 	}
 }
 
-// 二进制转uint32
+// covert []byte to uint32.
 func ByteToUint32(data []byte) uint32 {
 	if littleEndian {
 		return binary.LittleEndian.Uint32(data)
@@ -66,21 +66,14 @@ func ByteToUint32(data []byte) uint32 {
 	}
 }
 
-// // Uint16转二进制.
-// func Uint16ToByte(value uint16) []byte {
-// 	ret := make([]byte, 2)
-// 	if littleEndian {
-// 		binary.LittleEndian.PutUint16(ret, value)
-// 	} else {
-// 		binary.BigEndian.PutUint16(ret, value)
-// 	}
-// 	return ret
-// }
-
 /************************************************************************/
-// 模块内功能实现
+// moudule functions.
 /************************************************************************/
 
 func init() {
 	littleEndian = true
 }
+
+/************************************************************************/
+// unit tests.
+/************************************************************************/

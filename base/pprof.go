@@ -1,7 +1,7 @@
 /*
  * go pprof.
  * author: CC
- * email : crazycloudcc@gmail.com
+ * email : 151503324@qq.com
  * date  : 2017.06.17
  */
 package base
@@ -23,10 +23,10 @@ type Pprof struct {
 }
 
 /************************************************************************/
-// 模块对外接口.
+// export functions.
 /************************************************************************/
 
-// 开启pprof
+// open pprof.
 func (this *Pprof) Open(fname string) {
 	// this.profile = flag.String("cpuprofile", "", "write cpu profile")
 	// flag.Parse()
@@ -40,7 +40,7 @@ func (this *Pprof) Open(fname string) {
 	pprof.StartCPUProfile(this.fp)
 }
 
-// 关闭pprof
+// close pprof.
 func (this *Pprof) Close() {
 	// defer os.Exit(1)
 	pprof.StopCPUProfile()
@@ -49,5 +49,9 @@ func (this *Pprof) Close() {
 }
 
 /************************************************************************/
-// 模块内功能实现
+// moudule functions.
+/************************************************************************/
+
+/************************************************************************/
+// unit tests.
 /************************************************************************/

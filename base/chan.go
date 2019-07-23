@@ -1,7 +1,7 @@
 /*
  * go channel.
  * author: CC
- * email : crazycloudcc@gmail.com
+ * email : 151503324@qq.com
  * date  : 2017.06.17
  */
 package base
@@ -25,11 +25,10 @@ type Chan struct {
 }
 
 /************************************************************************/
-// 模块对外接口.
+// export functions.
 /************************************************************************/
 
-// 创建通道.
-// 参数列表: 1-元素数量, 2-通道数据接收函数.
+// create and open channel.
 func NewChan(count int32, listener ChanListener) *Chan {
 	ret := new(Chan)
 	ret.ch = make(chan interface{}, count)
@@ -40,23 +39,29 @@ func NewChan(count int32, listener ChanListener) *Chan {
 	return ret
 }
 
-// 关闭通道.
+// close and destroy channel.
 func (this *Chan) Close() {
+	if this.closeFlag {
+		return
+	}
 	this.closeFlag = true
 	this.ch <- nil
 	close(this.ch)
 }
 
-// 向通道写入数据.
+// write data to channel.
 func (this *Chan) Write(data interface{}) {
+	if this.closeFlag {
+		return
+	}
 	this.ch <- data
 }
 
 /************************************************************************/
-// 模块内功能实现
+// moudule functions.
 /************************************************************************/
 
-// goroutine 读取数据.
+// goroutine read data from channel.
 func (this *Chan) listen() {
 	for {
 		data := <-this.ch

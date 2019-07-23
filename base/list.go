@@ -1,7 +1,8 @@
 /*
- * 链表. 对container/list的封装.
- * 默认以单向链表方式使用.
- * 可扩展至双向链表.
+ * go container/list.
+ * author: CC
+ * email : 151503324@qq.com
+ * date  : 2017.06.17
  */
 package base
 
@@ -12,7 +13,7 @@ import (
 )
 
 /************************************************************************/
-// 常量, 变量, 结构体, 接口定义.
+// constants, variables, structs, interfaces.
 /************************************************************************/
 
 type List struct {
@@ -20,28 +21,29 @@ type List struct {
 }
 
 /************************************************************************/
-// 模块对外接口.
+// export functions.
 /************************************************************************/
 
+// create new list.
 func NewList(max int32) *List {
 	l := new(List)
 	l.listDatas = list.New()
 	return l
 }
 
-// 添加到列表尾部.
+// pushback.
 func (this *List) PushBack(element interface{}) error {
 	this.listDatas.PushBack(element)
 	return nil
 }
 
-// 添加到列表头部.
+// pushfront.
 func (this *List) PushFront(element interface{}) error {
 	this.listDatas.PushFront(element)
 	return nil
 }
 
-// 插入.
+// insert.
 func (this *List) Insert(index uint32, element interface{}) error {
 	if index == 0 {
 		this.PushFront(element)
@@ -63,7 +65,7 @@ func (this *List) Insert(index uint32, element interface{}) error {
 	return nil
 }
 
-// 删除.
+// delete.
 func (this *List) Del(index uint32) (interface{}, error) {
 	if index >= uint32(this.listDatas.Len()) {
 		return nil, errors.New("Del index error!")
@@ -77,7 +79,7 @@ func (this *List) Del(index uint32) (interface{}, error) {
 	return ret, nil
 }
 
-// 获取.
+// get.
 func (this *List) Get(index uint32) (interface{}, error) {
 	if index >= uint32(this.listDatas.Len()) {
 		return nil, errors.New("Get index error!")
@@ -90,12 +92,12 @@ func (this *List) Get(index uint32) (interface{}, error) {
 	return mark.Value, nil
 }
 
-// 长度.
+// length.
 func (this *List) Len() int {
 	return this.listDatas.Len()
 }
 
-// 遍历.
+// for range.
 func (this *List) ForRange(f func(index int32, value interface{})) {
 	len := int32(this.listDatas.Len())
 	if len > 0 {
@@ -108,35 +110,7 @@ func (this *List) ForRange(f func(index int32, value interface{})) {
 	}
 }
 
-// 移动到目标元素之前
-func (this *List) MoveBefore(startIdx uint32, endIdx uint32) error {
-	if startIdx >= uint32(this.listDatas.Len()) || startIdx >= uint32(this.listDatas.Len()) {
-		return errors.New("Move index error!")
-	}
-	if startIdx == endIdx {
-		return errors.New("Move index repeat!")
-	}
-	startEle := this.getEle(startIdx)
-	endEle := this.getEle(endIdx)
-	this.listDatas.MoveBefore(startEle, endEle)
-	return nil
-}
-
-// 移动到目标元素之前
-func (this *List) MoveAfter(startIdx uint32, endIdx uint32) error {
-	if startIdx >= uint32(this.listDatas.Len()) || startIdx >= uint32(this.listDatas.Len()) {
-		return errors.New("Move index error!")
-	}
-	if startIdx == endIdx {
-		return errors.New("Move index repeat!")
-	}
-	startEle := this.getEle(startIdx)
-	endEle := this.getEle(endIdx)
-	this.listDatas.MoveAfter(startEle, endEle)
-	return nil
-}
-
-// 字符串化.
+// data to string.
 func (this *List) String() string {
 	ret := "List Data: "
 	len := this.listDatas.Len()
@@ -153,23 +127,9 @@ func (this *List) String() string {
 }
 
 /************************************************************************/
-// 模块内功能实现.
-/************************************************************************/
-
-//获取目标元素
-func (this *List) getEle(index uint32) *list.Element {
-	mark := this.listDatas.Front()
-	var i uint32
-	for i = 0; i < index; i++ {
-		mark = mark.Next()
-	}
-	return mark
-}
-
-/************************************************************************/
-// 模块内功能调试.
+// moudule functions.
 /************************************************************************/
 
 /************************************************************************/
-// 模块单元测试.
+// unit tests.
 /************************************************************************/
