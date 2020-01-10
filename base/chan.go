@@ -28,7 +28,7 @@ type Chan struct {
 // export functions.
 /************************************************************************/
 
-// create and open channel.
+// NewChan create and open channel.
 func NewChan(count int32, listener ChanListener) *Chan {
 	ret := new(Chan)
 	ret.ch = make(chan interface{}, count)
@@ -39,22 +39,22 @@ func NewChan(count int32, listener ChanListener) *Chan {
 	return ret
 }
 
-// close and destroy channel.
-func (this *Chan) Close() {
-	if this.closeFlag {
+// Close close and destroy channel.
+func (owner *Chan) Close() {
+	if owner.closeFlag {
 		return
 	}
-	this.closeFlag = true
-	this.ch <- nil
-	close(this.ch)
+	owner.closeFlag = true
+	owner.ch <- nil
+	close(owner.ch)
 }
 
-// write data to channel.
-func (this *Chan) Write(data interface{}) {
-	if this.closeFlag {
+// Write write data to channel.
+func (owner *Chan) Write(data interface{}) {
+	if owner.closeFlag {
 		return
 	}
-	this.ch <- data
+	owner.ch <- data
 }
 
 /************************************************************************/
@@ -62,13 +62,13 @@ func (this *Chan) Write(data interface{}) {
 /************************************************************************/
 
 // goroutine read data from channel.
-func (this *Chan) listen() {
+func (owner *Chan) listen() {
 	for {
-		data := <-this.ch
-		if this.closeFlag {
+		data := <-owner.ch
+		if owner.closeFlag {
 			// LogDebug("chan.go - listen exit.")
 			break
 		}
-		this.listener(data)
+		owner.listener(data)
 	}
 }
