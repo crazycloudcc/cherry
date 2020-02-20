@@ -8,8 +8,9 @@ package nettcp
  */
 
 import (
-	"cherry/base"
 	"errors"
+
+	"github.com/crazycloudcc/cherry/base"
 )
 
 /************************************************************************/

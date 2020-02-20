@@ -1,15 +1,17 @@
+package dbproxy
+
 /*
  * database proxy config.
  * author: CC
  * email : 151503324@qq.com
  * date  : 2017.06.17
  */
-package dbproxy
 
 /************************************************************************/
 // constants, variables, structs, interfaces.
 /************************************************************************/
 
+// RedisConfig TODO
 type RedisConfig struct {
 	Flag     int32
 	Type     string

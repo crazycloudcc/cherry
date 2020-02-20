@@ -7,7 +7,7 @@ package nettcp
  * date  : 2017.06.17
  */
 
-import "cherry/base"
+import "github.com/crazycloudcc/cherry/base"
 
 /************************************************************************/
 // constants, variables, structs, interfaces.

@@ -1,15 +1,17 @@
+package dbproxy
+
 /*
  * mongodb connect proxy.
  * author: CC
  * email : 151503324@qq.com
  * date  : 2017.06.17
  */
-package dbproxy
 
 /************************************************************************/
 // constants, variables, structs, interfaces.
 /************************************************************************/
 
+// MongoDB TODO.
 type MongoDB struct {
 }
 
@@ -17,6 +19,7 @@ type MongoDB struct {
 // export functions.
 /************************************************************************/
 
+// NewMongoDB TODO.
 func NewMongoDB() *MongoDB {
 	m := new(MongoDB)
 	return m

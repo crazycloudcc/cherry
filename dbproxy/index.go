@@ -1,22 +1,27 @@
+package dbproxy
+
 /*
  * [file desc]
  * author: CC
  * email : 151503324@qq.com
  * date  : 2017.06.17
  */
-package dbproxy
 
 /************************************************************************/
 // constants, variables, structs, interfaces.
 /************************************************************************/
 
-var InsRedisRemote *Redis // remote redis.
-var InsRedisLocal *Redis  // local redis.
+// InsRedisRemote remote redis instance.
+var InsRedisRemote *Redis
+
+// InsRedisLocal local redis instance.
+var InsRedisLocal *Redis
 
 /************************************************************************/
 // export functions.
 /************************************************************************/
 
+// RedisConnectRemote TODO.
 func RedisConnectRemote(conf RedisConfig) bool {
 	InsRedisRemote = newRedisProxy(conf)
 	if InsRedisRemote == nil {
@@ -25,6 +30,7 @@ func RedisConnectRemote(conf RedisConfig) bool {
 	return true
 }
 
+// RedisConnectLocal TODO.
 func RedisConnectLocal(conf RedisConfig) bool {
 	InsRedisLocal = newRedisProxy(conf)
 	if InsRedisLocal == nil {

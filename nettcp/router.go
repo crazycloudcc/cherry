@@ -8,10 +8,11 @@ package nettcp
  */
 
 import (
-	"cherry/base"
 	"fmt"
 	"reflect"
 	"sync"
+
+	"github.com/crazycloudcc/cherry/base"
 )
 
 /************************************************************************/

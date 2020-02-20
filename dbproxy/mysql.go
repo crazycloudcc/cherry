@@ -1,15 +1,17 @@
+package dbproxy
+
 /*
  * mysql connect proxy.
  * author: CC
  * email : 151503324@qq.com
  * date  : 2017.06.17
  */
-package dbproxy
 
 /************************************************************************/
 // constants, variables, structs, interfaces.
 /************************************************************************/
 
+// Mysql TODO.
 type Mysql struct {
 }
 
@@ -17,6 +19,7 @@ type Mysql struct {
 // export functions.
 /************************************************************************/
 
+// NewMysql TODO.
 func NewMysql() *Mysql {
 	m := new(Mysql)
 	return m

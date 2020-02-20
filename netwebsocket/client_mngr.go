@@ -1,8 +1,9 @@
 package netwebsocket
 
 import (
-	"cherry/base"
 	"sync"
+
+	"github.com/crazycloudcc/cherry/base"
 
 	"github.com/gorilla/websocket"
 )

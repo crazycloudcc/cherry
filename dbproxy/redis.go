@@ -1,17 +1,19 @@
+package dbproxy
+
 /*
  * redis connect proxy. (redigo)
  * author: CC
  * email : 151503324@qq.com
  * date  : 2017.06.17
  */
-package dbproxy
 
 import (
 	"bytes"
-	"cherry/base"
 	"encoding/gob"
 	"encoding/json"
 	"fmt"
+
+	"github.com/crazycloudcc/cherry/base"
 
 	"github.com/garyburd/redigo/redis"
 )
@@ -20,6 +22,7 @@ import (
 // constants, variables, structs, interfaces.
 /************************************************************************/
 
+// Redis TODO
 type Redis struct {
 	conf  RedisConfig
 	rConn redis.Conn
@@ -30,44 +33,52 @@ type Redis struct {
 // export functions.
 /************************************************************************/
 
-func (this *Redis) ReadCommand(cmd string, args ...interface{}) (interface{}, error) {
-	return this.rConn.Do(cmd, args...)
+// ReadCommand TODO
+func (owner *Redis) ReadCommand(cmd string, args ...interface{}) (interface{}, error) {
+	return owner.rConn.Do(cmd, args...)
 }
 
-func (this *Redis) ReadCommands(cmd string, args ...interface{}) error {
-	return this.rConn.Send(cmd, args...)
+// ReadCommands TODO
+func (owner *Redis) ReadCommands(cmd string, args ...interface{}) error {
+	return owner.rConn.Send(cmd, args...)
 }
 
-func (this *Redis) ReadCommandsFlush() error {
-	return this.rConn.Flush()
+// ReadCommandsFlush TODO
+func (owner *Redis) ReadCommandsFlush() error {
+	return owner.rConn.Flush()
 }
 
-func (this *Redis) ReadCommandsReply() (interface{}, error) {
-	return this.rConn.Receive()
+// ReadCommandsReply TODO
+func (owner *Redis) ReadCommandsReply() (interface{}, error) {
+	return owner.rConn.Receive()
 }
 
-func (this *Redis) WriteCommand(cmd string, args ...interface{}) (interface{}, error) {
-	return this.wConn.Do(cmd, args...)
+// WriteCommand TODO
+func (owner *Redis) WriteCommand(cmd string, args ...interface{}) (interface{}, error) {
+	return owner.wConn.Do(cmd, args...)
 }
 
-func (this *Redis) WriteCommands(cmd string, args ...interface{}) error {
-	return this.wConn.Send(cmd, args...)
+// WriteCommands TODO
+func (owner *Redis) WriteCommands(cmd string, args ...interface{}) error {
+	return owner.wConn.Send(cmd, args...)
 }
 
-func (this *Redis) WriteCommandsFlush() error {
-	return this.wConn.Flush()
+// WriteCommandsFlush TODO
+func (owner *Redis) WriteCommandsFlush() error {
+	return owner.wConn.Flush()
 }
 
-func (this *Redis) WriteCommandsReply() (interface{}, error) {
-	return this.wConn.Receive()
+// WriteCommandsReply TODO
+func (owner *Redis) WriteCommandsReply() (interface{}, error) {
+	return owner.wConn.Receive()
 }
 
-// convert interface{} to []interface{}
+// RedisValues convert interface{} to []interface{}
 func RedisValues(reply interface{}, err error) ([]interface{}, error) {
 	return redis.Values(reply, err)
 }
 
-// convert interface{} to redis data.
+// RedisMarshalWithGob convert interface{} to redis data.
 func RedisMarshalWithGob(data interface{}) *bytes.Buffer {
 	buf := bytes.NewBuffer(nil)
 	encoder := gob.NewEncoder(buf)
@@ -79,7 +90,7 @@ func RedisMarshalWithGob(data interface{}) *bytes.Buffer {
 	return buf
 }
 
-// convert redis data to interface{}.
+// RedisUnmarshalWithGob convert redis data to interface{}.
 func RedisUnmarshalWithGob(data []byte, reply interface{}) {
 	buf := bytes.NewBuffer(data)
 	decoder := gob.NewDecoder(buf)
@@ -89,7 +100,7 @@ func RedisUnmarshalWithGob(data []byte, reply interface{}) {
 	}
 }
 
-// convert interface{} to redis data. (json type.)
+// RedisMarshal convert interface{} to redis data. (json type.)
 func RedisMarshal(data interface{}) []byte {
 	buf, err := json.Marshal(data)
 	if err != nil {
@@ -100,7 +111,7 @@ func RedisMarshal(data interface{}) []byte {
 	return buf
 }
 
-// convert redis data to interface{}. (json type.)
+// RedisUnmarshal convert redis data to interface{}. (json type.)
 func RedisUnmarshal(data []byte, reply interface{}) {
 	err := json.Unmarshal(data, reply)
 	if err != nil {

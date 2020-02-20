@@ -9,11 +9,12 @@ package nettcp
 
 import (
 	"bytes"
-	"cherry/base"
 	"fmt"
 	"net"
 	"sync"
 	"time"
+
+	"github.com/crazycloudcc/cherry/base"
 )
 
 /************************************************************************/
